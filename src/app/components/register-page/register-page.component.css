@@ -1,4 +1,4 @@
-.login-page-container {
+.register-page-container {
     position: relative;
     display: flex;
     justify-content: center;
@@ -9,7 +9,7 @@
     overflow: hidden; /* Garante que o pseudo-elemento não ultrapasse os limites do contêiner */
 }
 
-.login-page-container::before {
+.register-page-container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -33,38 +33,43 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    height: 400px;
+    width: 30%;
+    height: 90%;
+    margin-bottom: 30px;
 }
 
-
 .header {
-    margin-bottom: -40px;
+    position: relative;
+    bottom: 30px;
 }
 
 .fields {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     font-family: sans-serif;
-
+    bottom: 70px;
 }
 
-.fields input {
+.fields input, select {
     height: 40px;
     border-radius: 10px;
-    margin-top: 5px;
+    padding-left: 10px; /* Adiciona um espaçamento à esquerda do texto dentro do input */
+
     border-width: 1px; /* Borda de 1px de espessura */
-    padding-left: 5px; /* Adiciona um espaçamento à esquerda do texto dentro do input */
+
 }
 
 .fields button {
-    height: 50px;
-    border-radius: 10px;
+    height: 45px;
+
     background-color: #abebc6;
+    border-radius: 10px;
     border: none;
-    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transição suave */
+
+
 }
 
 .fields button:hover {
@@ -72,18 +77,66 @@
     transform: scale(1.05); /* Aumenta ligeiramente o tamanho do botão */
 }
 
-.fields label a {
-    transition: background-color 0.3s ease; /* Adiciona uma transição suave */
+@media (max-width: 1600px) and (min-width: 900px) {
+    .header {
+        position: relative;
+        bottom: 30px;
+    }
+    .fields {
+        position: relative;
+        bottom: 70px;
+        margin-top: 10px;
+    }
+    .fields input, select {
+        height: 34px;
+        border-radius: 10px;
+    }
+    .fields button {
+        position: relative;
+        bottom: 10px;
+    }
+
+    #login-label {
+        position: relative;
+        bottom: 20px;
+    }
 }
 
-.fields label a:hover {
-    color:#2ecc71;
-}
+@media (max-width: 1368px) and (min-width: 768px) {
+    .header {
+        position: relative;
+        bottom: 30px;
+    }
 
+    .fields {
+        margin-top: 8px;
+    }
+
+    .fields input, select {
+        height: 23px;
+
+    }
+
+    .fields button {
+        position: relative;
+        height: 30px;
+    }
+}
 
 @media (max-width: 768px) {
-
     .inputs-container {
-        width: 320px;
+        width: 300px;
     }
+    .fields {
+        margin-top: 4px;
+
+    }
+
+    .fields input, select {
+        height: 35px;
+
+    }
+
+
+
 }

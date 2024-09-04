@@ -1,0 +1,61 @@
+<div class="register-page-container">
+
+    <div class="inputs-container">
+  
+      <div class="header">
+        <h1>Registre-se</h1>
+      </div>
+  
+      <div class="fields">
+        <label>Nome completo</label>
+        <input type="text" placeholder="Digite seu nome completo" required maxlength="50">
+      </div>
+  
+      <div class="fields">
+        <label>Email</label>
+        <input type="email" placeholder="Digite seu e-mail" required maxlength="50">
+      </div>
+  
+      <div class="fields">
+        <label>Bloco</label>
+        <select id="dropdown-blocks" [(ngModel)]="selectedBlock" (change)="onBlockSelect($event)" name="dropdown-blocks">
+          <option *ngFor="let block of blocks" [value]="block">
+            BLOCO {{ block }}
+          </option>
+        </select>
+      </div>
+  
+      <div class="fields">
+        <label>Selecione um AP</label>
+        <select [disabled]="selectedBlock === null">
+          <option *ngFor="let apartment of apartments" [value]="apartment">{{ apartment }}</option>
+        </select>
+      </div>
+  
+      <div class="fields">
+        <label>CPF</label>
+        <input type="text" placeholder="Digite seu CPF" required maxlength="14">
+      </div>
+  
+      <div class="fields">
+        <label>Senha</label>
+        <input type="password" placeholder="Digite sua senha" required maxlength="50">
+      </div>
+  
+      <div class="fields">
+        <label>Confirmar Senha</label>
+        <input type="password" placeholder="Digite novamente sua senha" required maxlength="50">
+      </div>
+  
+      <div class="fields">
+        <button>Registrar-se</button>
+      </div>
+  
+      <div class="fields">
+        <label id="login-label">Caso já tenha uma conta, <a [routerLink]="['/login']">faça login aqui</a></label>
+      </div>
+  
+    </div>
+  
+  </div>
+  
