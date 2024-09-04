@@ -1,0 +1,74 @@
+.login-page-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5); /* Sobreposição preta com 50% de transparência */
+    overflow: hidden; /* Garante que o pseudo-elemento não ultrapasse os limites do contêiner */
+}
+
+.login-page-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/background-login.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px); /* Aplica o desfoque */
+    z-index: 1; /* Coloca o pseudo-elemento atrás do conteúdo */
+}
+
+.inputs-container {
+    position: relative;
+    z-index: 2; /* Garante que o conteúdo fique acima da imagem desfocada */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com 90% de opacidade */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 400px;
+}
+
+
+.header {
+    margin-bottom: -40px;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-family: sans-serif;
+
+}
+
+.fields input {
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 5px;
+    border-width: 1px; /* Borda de 1px de espessura */
+    padding-left: 5px; /* Adiciona um espaçamento à esquerda do texto dentro do input */
+}
+
+.fields button {
+    height: 50px;
+    border-radius: 10px;
+    background-color: #abebc6;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transição suave */
+}
+
+.fields button:hover {
+    background-color: #58d68d;
+    transform: scale(1.05); /* Aumenta ligeiramente o tamanho do botão */
+}
+
