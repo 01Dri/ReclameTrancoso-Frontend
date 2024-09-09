@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ConstantValues } from '../../utils/constants';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RequestService } from '../../services/request.service';
 import { ResidentRegisterRequestDTO } from '../../models/ResidentRegisterRequestDTO';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
 import { BuildingDTO } from '../../models/BuildingDTO';
 import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-register-page',
@@ -21,14 +23,17 @@ export class RegisterPageComponent implements OnInit {
   selectedBlock: number | null = null;
   maxBlocks!: number;
   blocks: number[] = [];
-
+  public confirmPasssword:string = ""; 
   public buildingResponseDTO =  new BuildingResponseDTO();
   public residentRegisterRequestDTO =  new ResidentRegisterRequestDTO();
   public residentRegisterResponseDTO = new  ResidentRegisterResponseDTO();
+  public validationErrors: { [key: string]: string } = {};
 
   constructor
   (
-    private request: RequestService
+    private request: RequestService,
+    private toastr: ToastrService,
+    private router: Router
 
   ) {
   }
@@ -38,15 +43,33 @@ export class RegisterPageComponent implements OnInit {
   }
 
   public register() {
-    this.request.post<ResidentRegisterResponseDTO>(`${ConstantValues.ROUTE_V1}/residents`, this.residentRegisterRequestDTO)
+    this.validatePassword();
+    this.request.post<ResidentRegisterResponseDTO>(`v1/resident`, this.residentRegisterRequestDTO)
       .subscribe({
         next: (response: ResidentRegisterResponseDTO) => {
           this.residentRegisterResponseDTO = response;
+          this.toastr.success('Usuário criado com sucesso!', 'Sucesso');
+          setTimeout(() => {
+              this.router.navigateByUrl('/login');
+          }, 5000)
+
         },
-        error: (error) => {
-          console.log("ERRO " + error);
-        }
+        error: (error: HttpErrorResponse) => {
+          console.log("ERRO ", error);
+          console.log("Status:", error.status);
+          console.log("Message:", error.message);
+
+          if (error.error && error.error.Errors) {
+            this.validationErrors = {};
+            error.error.Errors.forEach((err: any) => {
+              this.validationErrors[err.Field] = err.Error;
+            });
+          } else {
+            console.log("Detalhes do Erro:", error.error);
+          }
+        },
       });
+
   }
 
   public getBuildings() {
@@ -64,6 +87,12 @@ export class RegisterPageComponent implements OnInit {
     });
   }
 
+  public validatePassword() {
+    if (this.residentRegisterRequestDTO.password !== this.confirmPasssword) {
+      this.validationErrors["PasswordConfirmation"] = "Senhas não se correspondem";
+    } 
+  }
+
   public onBlockSelect(event: Event) {
     const target = event.target as HTMLSelectElement;
     const block = target.value ? parseInt(target.value, 10) : null;
@@ -73,5 +102,9 @@ export class RegisterPageComponent implements OnInit {
       const endApartment = 5 * block;
       this.apartments = Array.from({ length: 5 }, (_, i) => startApartment + i);
     }
+  }
+
+  public showSuccess() {
+    this.toastr.success("Usuario criado!", "Success");
   }
 }
