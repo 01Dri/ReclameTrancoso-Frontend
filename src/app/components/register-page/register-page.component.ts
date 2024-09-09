@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { RequestService } from '../../services/request.service';
 import { ResidentRegisterRequestDTO } from '../../models/ResidentRegisterRequestDTO';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
-import { BuildingDTO } from '../../models/BuildingDTO';
 import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -55,9 +54,6 @@ export class RegisterPageComponent implements OnInit {
           this.toastr.success('Usuário criado com sucesso!', 'Sucesso');
         },
         error: (error: HttpErrorResponse) => {
-          console.log("ERRO ", error);
-          console.log("Status:", error.status);
-          console.log("Message:", error.message);
           this.isAlreadyRequest = false;
           if (error.error && error.error.Errors) {
             this.validationErrors = {};
@@ -104,9 +100,5 @@ export class RegisterPageComponent implements OnInit {
       const endApartment = 5 * block;
       this.apartments = Array.from({ length: 5 }, (_, i) => startApartment + i);
     }
-  }
-
-  public showSuccess() {
-    this.toastr.success("Usuario criado!", "Success");
   }
 }
