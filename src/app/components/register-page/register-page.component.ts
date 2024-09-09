@@ -9,7 +9,6 @@ import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-register-page',
   standalone: true,
@@ -17,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css']
 })
+
 export class RegisterPageComponent implements OnInit {
   public apartments: number[] = [];
   public selectedBlock: number | null = null;
