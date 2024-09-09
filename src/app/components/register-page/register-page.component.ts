@@ -28,7 +28,7 @@ export class RegisterPageComponent implements OnInit {
   public residentRegisterRequestDTO =  new ResidentRegisterRequestDTO();
   public residentRegisterResponseDTO = new  ResidentRegisterResponseDTO();
   public validationErrors: { [key: string]: string } = {};
-
+  public isAlreadyRequest: boolean = false;
   constructor
   (
     private request: RequestService,
@@ -47,18 +47,18 @@ export class RegisterPageComponent implements OnInit {
     this.request.post<ResidentRegisterResponseDTO>(`v1/resident`, this.residentRegisterRequestDTO)
       .subscribe({
         next: (response: ResidentRegisterResponseDTO) => {
+          this.isAlreadyRequest = true;
           this.residentRegisterResponseDTO = response;
-          this.toastr.success('Usuário criado com sucesso!', 'Sucesso');
           setTimeout(() => {
               this.router.navigateByUrl('/login');
-          }, 5000)
-
+          }, 900)
+          this.toastr.success('Usuário criado com sucesso!', 'Sucesso');
         },
         error: (error: HttpErrorResponse) => {
           console.log("ERRO ", error);
           console.log("Status:", error.status);
           console.log("Message:", error.message);
-
+          this.isAlreadyRequest = false;
           if (error.error && error.error.Errors) {
             this.validationErrors = {};
             error.error.Errors.forEach((err: any) => {
@@ -90,7 +90,9 @@ export class RegisterPageComponent implements OnInit {
   public validatePassword() {
     if (this.residentRegisterRequestDTO.password !== this.confirmPasssword) {
       this.validationErrors["PasswordConfirmation"] = "Senhas não se correspondem";
-    } 
+    }  else {
+      this.validationErrors["PasswordConfirmation"] = "";
+    }
   }
 
   public onBlockSelect(event: Event) {

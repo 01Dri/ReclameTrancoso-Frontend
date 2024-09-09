@@ -15,7 +15,7 @@
     <div class="fields">
       <label>Email</label>
       <input type="email" placeholder="Digite seu e-mail" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.email" name="email">
-      <div *ngIf="validationErrors['email']" class="error-message">
+      <div *ngIf="validationErrors['Email']" class="error-message">
         {{ validationErrors['Email'] }}
       </div>
     </div>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="fields" (click)="register()">
-      <button>Registrar-se</button>
+      <button [disabled]="isAlreadyRequest" id="submit-btn">Registrar-se</button>
     </div>
 
     <div class="fields">
