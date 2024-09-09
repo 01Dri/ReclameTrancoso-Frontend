@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ConstantValues } from '../../utils/constants';
 import { FormsModule } from '@angular/forms';
+import { RequestService } from '../../services/request.service';
+import { ResidentRegisterRequestDTO } from '../../models/ResidentRegisterRequestDTO';
+import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
+import { BuildingDTO } from '../../models/BuildingDTO';
+import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
 
 @Component({
   selector: 'app-register-page',
@@ -11,15 +16,52 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css']
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
   apartments: number[] = [];
   selectedBlock: number | null = null;
-  maxBlocks: number;
+  maxBlocks!: number;
   blocks: number[] = [];
 
-  constructor() {
-    this.maxBlocks = ConstantValues.MAX_BUILDS;
-    this.blocks = Array.from({ length: this.maxBlocks }, (_, i) => i + 1);
+  public buildingResponseDTO =  new BuildingResponseDTO();
+  public residentRegisterRequestDTO =  new ResidentRegisterRequestDTO();
+  public residentRegisterResponseDTO = new  ResidentRegisterResponseDTO();
+
+  constructor
+  (
+    private request: RequestService
+
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.getBuildings();
+  }
+
+  public register() {
+    this.request.post<ResidentRegisterResponseDTO>(`${ConstantValues.ROUTE_V1}/residents`, this.residentRegisterRequestDTO)
+      .subscribe({
+        next: (response: ResidentRegisterResponseDTO) => {
+          this.residentRegisterResponseDTO = response;
+        },
+        error: (error) => {
+          console.log("ERRO " + error);
+        }
+      });
+  }
+
+  public getBuildings() {
+    this.request.get<BuildingResponseDTO>(`v1/buildings`)
+    .subscribe({
+      next: (response: BuildingResponseDTO) => {
+        this.buildingResponseDTO = response
+      },
+      error: (error) => {
+        console.log("ERROR: " + JSON.parse(error))
+      }, 
+      complete: () => {
+        this.blocks = Array.from({ length: this.buildingResponseDTO.buildings.length}, (_, i) => i + 1);
+      }
+    });
   }
 
   public onBlockSelect(event: Event) {

@@ -8,12 +8,12 @@
   
       <div class="fields">
         <label>Nome completo</label>
-        <input type="text" placeholder="Digite seu nome completo" required maxlength="50">
+        <input type="text" placeholder="Digite seu nome completo" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.name">
       </div>
   
       <div class="fields">
         <label>Email</label>
-        <input type="email" placeholder="Digite seu e-mail" required maxlength="50">
+        <input type="email" placeholder="Digite seu e-mail" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.email">
       </div>
   
       <div class="fields">
@@ -28,26 +28,26 @@
       <div class="fields">
         <label>Selecione um AP</label>
         <select [disabled]="selectedBlock === null">
-          <option *ngFor="let apartment of apartments" [value]="apartment">{{ apartment }}</option>
+          <option *ngFor="let apartment of apartments" [value]="apartment" [(ngModel)]="residentRegisterRequestDTO.apartmentId">{{ apartment }}</option>
         </select>
       </div>
   
       <div class="fields">
         <label>CPF</label>
-        <input type="text" placeholder="Digite seu CPF" required maxlength="14">
+        <input type="text" placeholder="Digite seu CPF" required maxlength="14"  [(ngModel)]="residentRegisterRequestDTO.cpf">
       </div>
   
       <div class="fields">
         <label>Senha</label>
-        <input type="password" placeholder="Digite sua senha" required maxlength="50">
+        <input type="password" placeholder="Digite sua senha" required maxlength="50"> 
       </div>
   
       <div class="fields">
         <label>Confirmar Senha</label>
-        <input type="password" placeholder="Digite novamente sua senha" required maxlength="50">
+        <input type="password" placeholder="Digite novamente sua senha" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.password">
       </div>
   
-      <div class="fields">
+      <div class="fields" (click)="register()">
         <button>Registrar-se</button>
       </div>
   
