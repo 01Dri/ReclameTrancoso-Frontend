@@ -1,61 +1,79 @@
 <div class="register-page-container">
-
-    <div class="inputs-container">
-  
-      <div class="header">
-        <h1>Registre-se</h1>
-      </div>
-  
-      <div class="fields">
-        <label>Nome completo</label>
-        <input type="text" placeholder="Digite seu nome completo" required maxlength="50">
-      </div>
-  
-      <div class="fields">
-        <label>Email</label>
-        <input type="email" placeholder="Digite seu e-mail" required maxlength="50">
-      </div>
-  
-      <div class="fields">
-        <label>Bloco</label>
-        <select id="dropdown-blocks" [(ngModel)]="selectedBlock" (change)="onBlockSelect($event)" name="dropdown-blocks">
-          <option *ngFor="let block of blocks" [value]="block">
-            BLOCO {{ block }}
-          </option>
-        </select>
-      </div>
-  
-      <div class="fields">
-        <label>Selecione um AP</label>
-        <select [disabled]="selectedBlock === null">
-          <option *ngFor="let apartment of apartments" [value]="apartment">{{ apartment }}</option>
-        </select>
-      </div>
-  
-      <div class="fields">
-        <label>CPF</label>
-        <input type="text" placeholder="Digite seu CPF" required maxlength="14">
-      </div>
-  
-      <div class="fields">
-        <label>Senha</label>
-        <input type="password" placeholder="Digite sua senha" required maxlength="50">
-      </div>
-  
-      <div class="fields">
-        <label>Confirmar Senha</label>
-        <input type="password" placeholder="Digite novamente sua senha" required maxlength="50">
-      </div>
-  
-      <div class="fields">
-        <button>Registrar-se</button>
-      </div>
-  
-      <div class="fields">
-        <label id="login-label">Caso já tenha uma conta, <a [routerLink]="['/login']">faça login aqui</a></label>
-      </div>
-  
+  <div class="inputs-container">
+    <div class="header">
+      <h1>Registre-se</h1>
     </div>
-  
+
+    <div class="fields">
+      <label>Nome completo</label>
+      <input type="text" placeholder="Digite seu nome completo" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.name" name="name">
+      <div *ngIf="validationErrors['Name']" class="error-message">
+        {{ validationErrors['Name'] }}
+      </div>
+    </div>
+
+    <div class="fields">
+      <label>Email</label>
+      <input type="email" placeholder="Digite seu e-mail" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.email" name="email">
+      <div *ngIf="validationErrors['Email']" class="error-message">
+        {{ validationErrors['Email'] }}
+      </div>
+    </div>
+
+    <div class="fields">
+      <label>Bloco</label>
+      <select id="dropdown-blocks" [(ngModel)]="selectedBlock" (change)="onBlockSelect($event)" name="dropdownBlocks" [(ngModel)]="residentRegisterRequestDTO.buildingId">
+        <option *ngFor="let block of blocks" [value]="block">
+          BLOCO {{ block }}
+        </option>
+      </select>
+      <div *ngIf="validationErrors['BuildingId']" class="error-message">
+        {{ validationErrors['BuildingId'] }}
+      </div>
+    </div>
+
+    <div class="fields">
+      <label>Selecione um AP</label>
+      <select [disabled]="selectedBlock === null" [(ngModel)]="residentRegisterRequestDTO.apartmentId" name="apartmentSelect">
+        <option *ngFor="let apartment of apartments" [value]="apartment">{{ apartment }}</option>
+      </select>
+      <div *ngIf="validationErrors['ApartmentId']" class="error-message">
+        {{ validationErrors['ApartmentId'] }}
+      </div>
+    </div>
+
+    <div class="fields">
+      <label>CPF</label>
+      <input type="text" placeholder="Digite seu CPF" required maxlength="14" [(ngModel)]="residentRegisterRequestDTO.cpf" name="cpf">
+      <div *ngIf="validationErrors['Cpf']" class="error-message">
+        {{ validationErrors['Cpf'] }}
+      </div>
+    </div>
+
+    <div class="fields">
+      <label>Senha</label>
+      <input type="password" placeholder="Digite sua senha" required maxlength="50" [(ngModel)]="residentRegisterRequestDTO.password" name="password"  (blur)="validatePassword()">
+      <div *ngIf="validationErrors['Password']" class="error-message">
+        {{ validationErrors['Password'] }}
+      </div>
+    </div>
+
+    <div class="fields">
+      <label>Confirmar Senha</label>
+      <input type="password" placeholder="Digite novamente sua senha" required maxlength="50"  name="passwordConfirmation"  (blur)="validatePassword()" [(ngModel)]="confirmPasssword">
+      <div *ngIf="validationErrors['PasswordConfirmation']" class="error-message">
+        {{ validationErrors['PasswordConfirmation'] }}
+      </div>
+    </div>
+
+    <div class="fields" (click)="register()">
+      <button [disabled]="isAlreadyRequest" id="submit-btn">Registrar-se</button>
+    </div>
+
+    <div class="fields">
+      <label id="login-label">Caso já tenha uma conta, <a [routerLink]="['/login']">faça login aqui</a></label>
+    </div>
+
   </div>
-  
+
+</div>

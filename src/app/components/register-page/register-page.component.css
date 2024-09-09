@@ -47,7 +47,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 15px;
     font-family: sans-serif;
     bottom: 70px;
 }
@@ -56,7 +56,6 @@
     height: 40px;
     border-radius: 10px;
     padding-left: 10px; /* Adiciona um espaçamento à esquerda do texto dentro do input */
-
     border-width: 1px; /* Borda de 1px de espessura */
 
 }
@@ -76,6 +75,16 @@
     background-color: #58d68d;
     transform: scale(1.05); /* Aumenta ligeiramente o tamanho do botão */
 }
+
+#submit-btn :disabled {
+    background-color: gray;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875em; /* Ajuste o tamanho da fonte conforme necessário */
+    margin-top: 0.25em; /* Espaço acima da mensagem de erro */
+  }
 
 @media (max-width: 1600px) and (min-width: 900px) {
     .header {

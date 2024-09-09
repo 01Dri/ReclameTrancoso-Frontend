@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ConstantValues } from '../../utils/constants';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RequestService } from '../../services/request.service';
+import { ResidentRegisterRequestDTO } from '../../models/ResidentRegisterRequestDTO';
+import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
+import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-page',
@@ -11,15 +16,79 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css']
 })
-export class RegisterPageComponent {
-  apartments: number[] = [];
-  selectedBlock: number | null = null;
-  maxBlocks: number;
-  blocks: number[] = [];
 
-  constructor() {
-    this.maxBlocks = ConstantValues.MAX_BUILDS;
-    this.blocks = Array.from({ length: this.maxBlocks }, (_, i) => i + 1);
+export class RegisterPageComponent implements OnInit {
+  public apartments: number[] = [];
+  public selectedBlock: number | null = null;
+  public blocks: number[] = [];
+  public confirmPasssword:string = ""; 
+  public buildingResponseDTO =  new BuildingResponseDTO();
+  public residentRegisterRequestDTO =  new ResidentRegisterRequestDTO();
+  public residentRegisterResponseDTO = new  ResidentRegisterResponseDTO();
+  public validationErrors: { [key: string]: string } = {};
+  public isAlreadyRequest: boolean = false;
+
+  constructor
+  (
+    private request: RequestService,
+    private toastr: ToastrService,
+    private router: Router
+
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.getBuildings();
+  }
+
+  public register() {
+    this.validatePassword();
+    this.request.post<ResidentRegisterResponseDTO>(`v1/resident`, this.residentRegisterRequestDTO)
+      .subscribe({
+        next: (response: ResidentRegisterResponseDTO) => {
+          this.isAlreadyRequest = true;
+          this.residentRegisterResponseDTO = response;
+          setTimeout(() => {
+              this.router.navigateByUrl('/login');
+          }, 900)
+          this.toastr.success('Usuário criado com sucesso!', 'Sucesso');
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isAlreadyRequest = false;
+          if (error.error && error.error.Errors) {
+            this.validationErrors = {};
+            error.error.Errors.forEach((err: any) => {
+              this.validationErrors[err.Field] = err.Error;
+            });
+          } else {
+            console.log("Detalhes do Erro:", error.error);
+          }
+        },
+      });
+
+  }
+
+  private getBuildings() {
+    this.request.get<BuildingResponseDTO>(`v1/buildings`)
+    .subscribe({
+      next: (response: BuildingResponseDTO) => {
+        this.buildingResponseDTO = response
+      },
+      error: (error) => {
+        console.log("ERROR: " + JSON.parse(error))
+      }, 
+      complete: () => {
+        this.blocks = Array.from({ length: this.buildingResponseDTO.buildings.length}, (_, i) => i + 1);
+      }
+    });
+  }
+
+  public validatePassword() {
+    if (this.residentRegisterRequestDTO.password !== this.confirmPasssword) {
+      this.validationErrors["PasswordConfirmation"] = "Senhas não se correspondem";
+    }  else {
+      this.validationErrors["PasswordConfirmation"] = "";
+    }
   }
 
   public onBlockSelect(event: Event) {
