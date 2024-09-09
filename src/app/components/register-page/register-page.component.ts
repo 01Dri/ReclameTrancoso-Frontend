@@ -18,16 +18,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit {
-  apartments: number[] = [];
-  selectedBlock: number | null = null;
-  maxBlocks!: number;
-  blocks: number[] = [];
+  public apartments: number[] = [];
+  public selectedBlock: number | null = null;
+  public blocks: number[] = [];
   public confirmPasssword:string = ""; 
   public buildingResponseDTO =  new BuildingResponseDTO();
   public residentRegisterRequestDTO =  new ResidentRegisterRequestDTO();
   public residentRegisterResponseDTO = new  ResidentRegisterResponseDTO();
   public validationErrors: { [key: string]: string } = {};
   public isAlreadyRequest: boolean = false;
+
   constructor
   (
     private request: RequestService,
@@ -68,7 +68,7 @@ export class RegisterPageComponent implements OnInit {
 
   }
 
-  public getBuildings() {
+  private getBuildings() {
     this.request.get<BuildingResponseDTO>(`v1/buildings`)
     .subscribe({
       next: (response: BuildingResponseDTO) => {
