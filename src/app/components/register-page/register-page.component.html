@@ -44,7 +44,7 @@
 
     <div class="fields">
       <label>CPF</label>
-      <input type="text" placeholder="Digite seu CPF" required maxlength="14" [(ngModel)]="residentRegisterRequestDTO.cpf" name="cpf">
+      <input type="text" placeholder="Digite seu CPF" required maxlength="14" [(ngModel)]="residentRegisterRequestDTO.cpf" name="cpf" appCpfMask>
       <div *ngIf="validationErrors['Cpf']" class="error-message">
         {{ validationErrors['Cpf'] }}
       </div>
