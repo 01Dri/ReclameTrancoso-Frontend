@@ -8,11 +8,12 @@ import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterRespon
 import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { CpfMaskDirective } from '../../diretives/cpf-mask.directive';
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, CpfMaskDirective],
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css']
 })
@@ -52,6 +53,8 @@ export class RegisterPageComponent implements OnInit {
               this.router.navigateByUrl('/login');
           }, 900)
           this.toastr.success('Usuário criado com sucesso!', 'Sucesso');
+          this.validationErrors = {};
+
         },
         error: (error: HttpErrorResponse) => {
           this.isAlreadyRequest = false;
