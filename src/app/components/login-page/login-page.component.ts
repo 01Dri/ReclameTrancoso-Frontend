@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { RequestService } from '../../services/request.service';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { CpfMaskDirective } from '../../diretives/cpf-mask.directive';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { TokenService } from '../../services/token.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent {
+export class LoginPageComponent  implements OnInit{
 
   public logintype: string = "";
   public loginRequestDto: LoginRequestDTO = new LoginRequestDTO();
@@ -29,9 +30,19 @@ export class LoginPageComponent {
     private router: Router,
     private request: RequestService,
     private toastr: ToastrService,
-    private localStorageService: LocalStorageService 
+    private localStorageService: LocalStorageService ,
+    private tokenService: TokenService
 
   ){}
+
+  ngOnInit(): void {
+    if (this.tokenService.isLogged()) {
+      console.log("TA LOGADO")
+      this.router.navigateByUrl("/home")
+    } else {
+      console.log("NÃO ESTÁ LOGADO");
+    }
+  }
 
 
   public navigateToRegister() {

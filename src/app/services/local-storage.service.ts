@@ -15,6 +15,9 @@ export class LocalStorageService {
   }
 
   public get(key: string): any {
-    this.storage.getItem(key);
+    return this.storage.getItem(key);
+  }
+  public getAll() {
+    this.storage.length;
   }
 }
