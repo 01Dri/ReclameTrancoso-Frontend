@@ -8,6 +8,7 @@ import { TokenResponseDTO } from '../../models/TokenResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { CpfMaskDirective } from '../../diretives/cpf-mask.directive';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class LoginPageComponent {
   constructor(
     private router: Router,
     private request: RequestService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private localStorageService: LocalStorageService 
 
   ){}
 
@@ -49,6 +51,13 @@ export class LoginPageComponent {
         this.tokenResponseDTO  =response;
         this.toastr.success('Login efetuado com sucesso!', 'Sucesso');
         this.validationErrors = {};
+        this.localStorageService.set("accessToken", this.tokenResponseDTO.accessToken);
+        this.localStorageService.set("refreshToken", this.tokenResponseDTO.refreshToken);
+
+        this.localStorageService.set("accessTokenExpiresAt", String(this.tokenResponseDTO.accessTokenExpiresAt));
+        this.localStorageService.set("refreshTokenExpiresAt", String(this.tokenResponseDTO.accessTokenExpiresAt));
+
+
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error('Ocorreu um erro!', 'Erro');
