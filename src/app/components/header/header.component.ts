@@ -3,7 +3,6 @@ import { RequestService } from '../../services/request.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BuildingDTO } from '../../models/BuildingDTO';
 
 @Component({
   selector: 'app-header',

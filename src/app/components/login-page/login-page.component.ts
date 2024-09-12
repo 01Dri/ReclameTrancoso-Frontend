@@ -73,6 +73,7 @@ export class LoginPageComponent  implements OnInit{
 
         this.cookieService.set("residentId", this.tokenResponseDTO.residentId.toString());
 
+        this.router.navigateByUrl("/home")
 
       },
       error: (error: HttpErrorResponse) => {

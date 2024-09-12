@@ -1,3 +1,77 @@
-<div class="complaint-header">
+<app-sidebar></app-sidebar>
+<div class="complaint-container">
+    <div class="complaint-header">
+        <h1>Reclame Trancoso</h1>
+    </div>
+
+    <form class="complaint-form">
+        <div class="fields">
+            <label>Titulo</label>
+            <input type="text">
+        </div>
+
+        <div class="fields-building-container">
+            <div class="fields-building">
+                <label>Tipo</label>
+                <select>
+                    <option>Bloco</option>
+                    <option>Parquinho</option>
+                    <option>Zona PET</option>
+                </select>
+            </div>
     
+            <div class="fields-building">
+                <label>Bloco</label>
+                <select>
+                    <option>Bloco</option>
+                    <option>Parquinho</option>
+                    <option>Zona PET</option>
+                </select>
+            </div>
+    
+            <div class="fields-building">
+                <label>Apartamento</label>
+                <select>
+                    <option>Bloco</option>
+                    <option>Parquinho</option>
+                    <option>Zona PET</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="fields">
+            <label>Motivo</label>
+            <input type="text" id="field-description">
+        </div>
+
+        <div class="fields-radio">
+            <label>Deseja anonimato?</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="anonimato" value="sim">
+                Sim
+              </label>
+              <label>
+                <input type="radio" name="anonimato" value="nao">
+                Não
+              </label>
+            </div>
+          </div>
+
+        <div class="fields-btn-container">
+            <div class="fields-btn">
+              <button
+                id="btn-submit">
+                Enviar Reclamação
+              </button>
+            </div>
+          
+            <div class="fields-btn">
+              <button
+                id="btn-clean">
+                Limpar
+              </button>
+            </div>
+          </div>
+    </form>
 </div>

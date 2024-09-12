@@ -1,0 +1,92 @@
+app-sidebar {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+.complaint-container {
+    position: relative;
+    left: 21%;
+    width: 700px;
+}
+
+.complaint-form {
+    position: relative;
+    border-color: black;
+    width: 100vh;
+    height: 80vh;
+    left: 20%;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.fields input {
+    height: 40px;
+    border-radius: 12px;
+}
+.fields select {
+    height: 40px;
+    border-radius: 12px;
+}
+
+#field-description {
+    height: 40vh;
+}
+
+
+.fields-btn-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; 
+    height: 60px;
+
+}
+
+#btn-submit {
+    background-color: #abebc6;
+    color: black;
+    border-radius: 10px;
+    height: 50px;
+    width: 200px;
+}
+
+#btn-clean {
+    color: black;
+    border-radius: 10px;
+    height: 50px;
+    width: 190px;
+    border-color: black;
+}
+
+
+#btn-submit:hover {
+    background-color: #2ecc71;
+    transform: scale(1.05);
+}
+
+#btn-clean:hover {
+    background-color: #e2e6ea;
+    transform: scale(1.05);
+}
+
+.fields-radio {
+    margin-bottom: 20px;
+}
+
+.fields-building-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.fields-building-container  select{
+    height: 50px;
+    border-radius: 10px;
+    width: 31vh;
+    margin-right: 28px;
+    border-color: black;
+
+}
