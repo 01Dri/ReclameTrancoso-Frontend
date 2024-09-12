@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
 
 
 @Injectable({
@@ -13,10 +14,11 @@ export class RequestService {
 
   constructor(
     private http: HttpClient,
+    private localStorageService: LocalStorageService,
     private cookie: CookieService) { }
 
   private getHeaders(): HttpHeaders {
-    const token = this.cookie.get('token');
+    const token = this.localStorageService.get('accessToken');
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);

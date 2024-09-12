@@ -3,6 +3,7 @@ import { RequestService } from '../../services/request.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BuildingDTO } from '../../models/BuildingDTO';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HeaderComponent implements OnInit {
 
   public residentResponseDTO: ResidentRegisterResponseDTO = new ResidentRegisterResponseDTO();
+
   constructor
   (
     private requestService: RequestService,
