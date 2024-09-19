@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button aria-label="Menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Reclama Trancoso</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container autosize>
+    <mat-sidenav [opened]="true" mode="side">
+      <mat-nav-list>
+        <a mat-list-item>
+          <span class="entry">
+            <mat-icon>house</mat-icon>
+            <span [routerLink]="['/home']">Home</span>
+          </span>
+        </a>
+
+        <a mat-list-item>
+            <span class="entry">
+              <mat-icon>assessment</mat-icon>
+              <span [routerLink]="['/complaint']">Abrir Ticket</span>
+            </span>
+          </a>
+  
+
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container>

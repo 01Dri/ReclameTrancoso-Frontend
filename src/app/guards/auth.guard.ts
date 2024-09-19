@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
 import { RequestService } from '../services/request.service';
 import { TokenResponseDTO } from '../models/TokenResponseDTO';
@@ -11,6 +11,8 @@ import { of, from } from 'rxjs';
 export const authGuard: CanActivateFn = (route, state) => {
   const localStorageService = inject(LocalStorageService);
   const requestService = inject(RequestService);
+  const router = inject(Router);
+
 
   const accessToken = localStorageService.get("accessToken");
   const refreshToken = localStorageService.get("refreshToken");
@@ -32,6 +34,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       }),
       catchError((error: HttpErrorResponse) => {
         console.log(error);
+        router.navigateByUrl("/login");
         return of(false);
       })
     );

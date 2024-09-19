@@ -1,1 +1,100 @@
-<p>complaint-page works!</p>
+<app-sidebar></app-sidebar>
+<div class="complaint-container">
+    <div class="complaint-header">
+        <h1>Reclame Trancoso</h1>
+    </div>
+
+    <form class="complaint-form">
+        <div class="fields">
+            <label>Titulo</label>
+            <input type="text" class="title" [(ngModel)]="createComplaintDTO.title" name="title">
+            <div *ngIf="validationErrors['Title']" class="error-message">
+              {{ validationErrors['Title'] }}
+            </div>
+        </div>
+
+        <div class="fields-building-container">
+          <div class="fields-building">
+            <label>Tipo</label>
+            <select [(ngModel)]="createComplaintDTO.complaintType" name="complaintType" (change)="onComplaintTypeChange()">
+              <option [value]="complaintTypes.APARTMENT">Apartamento</option>
+              <option [value]="complaintTypes.PARK">Parquinho</option>
+              <option [value]="complaintTypes.PARTY_HALL">Zona PET</option>
+            </select>
+            <div *ngIf="validationErrors['ComplaintType']" class="error-message">
+              {{ validationErrors['ComplaintType'] }}
+            </div>
+          </div>
+        
+          <div class="fields-building">
+            <label>Bloco</label>
+            <select id="dropdown-blocks" (change)="onBlockSelect($event)" name="additionalInformation1" [(ngModel)]="createComplaintDTO.additionalInformation1" [disabled]="isBlockDisabled">
+              <option *ngFor="let block of blocks" [value]="block">
+                BLOCO {{ block }}
+              </option>
+            </select>
+
+          </div>
+        
+          <div class="fields-building">
+            <label>Apartamento</label>
+            <select id="dropdown-apartments" [disabled]="isApartmentDisabled" [(ngModel)]="createComplaintDTO.additionalInformation2" name="additionalInformation2">
+              <option *ngFor="let apartment of apartments" [value]="apartment">{{ apartment }}</option>
+            </select>
+          </div>
+        </div>
+        
+
+        <div class="fields">
+          <label>Motivo</label>
+          <textarea id="field-description" [(ngModel)]="createComplaintDTO.description" name="description"></textarea>
+          <div *ngIf="validationErrors['Description']" class="error-message">
+            {{ validationErrors['Description'] }}
+          </div>
+        </div>
+
+        <div class="fields-radio">
+            <label>Deseja anonimato?</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="IsAnonymous" [value]=true [(ngModel)]="createComplaintDTO.IsAnonymous">
+                Sim
+              </label>
+              <label>
+                <input type="radio" name="IsAnonymous" [value]=false [(ngModel)]="createComplaintDTO.IsAnonymous">
+                Não
+              </label>
+            </div>
+
+            <div *ngIf="validationErrors['IsAnonymous']" class="error-message">
+              {{ validationErrors['IsAnonymous'] }}
+            </div>
+        </div>
+
+        <div class="fields-btn-container">
+            <div class="fields-btn">
+              <button
+                id="btn-submit"
+                (click)="createComplaint()"
+                [disabled]="isLoading">
+                >
+                Enviar Reclamação
+              </button>
+            </div>
+          
+            <div class="fields-btn">
+              <button
+                id="btn-clean"
+                type="button"
+                (click)="clearForm()"
+                >
+                Limpar
+              </button>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="isLoading" class="loading-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+
+mat-sidenav-container {
+    width: 20%;
+    height: 100%;
+}
+
+mat-toolbar {
+    width: 20%;
+}
+
+mat-icon {
+    position: relative;
+    top: 5px;
+}

@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CpfMaskDirective } from '../../diretives/cpf-mask.directive';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { TokenService } from '../../services/token.service';
+import { CookieService } from 'ngx-cookie-service';
+import { ResidentResponseDTO } from '../../models/ResidentResponseDTO';
 
 
 @Component({
@@ -31,7 +33,8 @@ export class LoginPageComponent  implements OnInit{
     private request: RequestService,
     private toastr: ToastrService,
     private localStorageService: LocalStorageService ,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private cookieService: CookieService
 
   ){}
 
@@ -68,6 +71,9 @@ export class LoginPageComponent  implements OnInit{
         this.localStorageService.set("accessTokenExpiresAt", String(this.tokenResponseDTO.accessTokenExpiresAt));
         this.localStorageService.set("refreshTokenExpiresAt", String(this.tokenResponseDTO.accessTokenExpiresAt));
 
+        this.cookieService.set("residentId", this.tokenResponseDTO.residentId.toString());
+
+        this.router.navigateByUrl("/home")
 
       },
       error: (error: HttpErrorResponse) => {
@@ -86,8 +92,10 @@ export class LoginPageComponent  implements OnInit{
           console.log("Detalhes do Erro:", error.error);
         }
       }
-    })
+    });
+
   }
+
 
 }
 
