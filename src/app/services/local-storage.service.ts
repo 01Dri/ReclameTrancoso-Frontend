@@ -20,4 +20,8 @@ export class LocalStorageService {
   public getAll() {
     this.storage.length;
   }
+
+  public clear() {
+    this.storage.clear();
+  }
 }
