@@ -1,0 +1,59 @@
+app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.header {
+    position: relative;
+    left: 15%;
+    
+}
+.complaint-container {
+    position: relative;
+    left: 10%;
+
+    width: 80%;
+    margin-left: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+    flex-grow: 1;
+}
+
+.complaint-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+}
+
+mat-paginator {
+    margin-top: auto;
+    width: 100%;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+mat-paginator {
+    margin-top: auto;
+    width: 100%;
+}
+
+mat-card-title, mat-card-subtitle, mat-card-content {
+    color: white;
+}
+
+
+.tratada {
+    color: green;
+  }
+  
+  .sem-tratativa {
+    color: red;
+  }
