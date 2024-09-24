@@ -12,5 +12,6 @@ export class ComplaintDTO {
     additionalInformation3!: string;
     isAnonymous!: boolean;
     status!: ComplaintStatus;
+    
 
 }
