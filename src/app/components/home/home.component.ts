@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ComplaintStatus } from '../../enums/ComplaintStatus';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -25,13 +26,17 @@ export class HomeComponent implements OnInit {
   public complaintHandled:ComplaintDTO[] = [];
   public complaintNotHandled:ComplaintDTO[] = [];
 
-  public pageSize: number = 5;
+  public pageSize: number = 10;
   public pageNumber: number = 1;
   public complaintStatus = ComplaintStatus; 
 
+  public selectedComplaint: ComplaintDTO | null = null; // Reclamação selecionada para expandir
+
+
   constructor(
     private requestService: RequestService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +84,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public expandComplaint(id: number) {
-    console.log(`Expandir reclamação com ID: ${id}`);
+  public expandComplaint(complaint: ComplaintDTO) {
+    this.selectedComplaint = complaint;
+    console.log(`Expandir reclamação com ID: ${complaint.id}`);
+    this.router.navigateByUrl('/complaint-details', { state: { complaint: this.selectedComplaint } });
+
   }
 }

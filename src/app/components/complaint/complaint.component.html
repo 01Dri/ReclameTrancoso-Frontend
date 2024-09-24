@@ -1,0 +1,37 @@
+<app-sidebar></app-sidebar>
+<div class="complaint-details">
+  <h2>Detalhes da Reclamação</h2>
+
+  <div class="complaint-info">
+    <p><strong>ID:</strong> {{ complaint.id }}</p>
+    <p><strong>Título:</strong> {{ complaint.title }}</p>
+    <p><strong>Tipo de Reclamação:</strong> {{ complaint.complaintType }}</p>
+    <p><strong>Bloco:</strong> {{ complaint.additionalInformation1 }}</p>
+    <p><strong>Apartamento:</strong> {{ complaint.additionalInformation2 }}</p>
+    <p><strong>Anônimo:</strong> {{ complaint.isAnonymous ? 'Sim' : 'Não' }}</p>
+    <p *ngIf="complaint.unionComment.text !== null"><strong>Comentário do Sindico:</strong> {{ complaint.unionComment.text}}</p>
+
+  </div>
+
+  <div class="complaint-edit">
+    <label for="description"><strong>Descrição:</strong></label>
+    <textarea id="description" [(ngModel)]="complaint.description" placeholder="Editar descrição da reclamação"></textarea>
+  </div>
+
+  <div class="resident-details">
+    <h2>Detalhes do Morador</h2>
+    <div class="resident-info">
+      <p><strong>ID do Morador:</strong> {{ residentResponseDTO.id }}</p>
+      <p><strong>Nome:</strong> {{ residentResponseDTO.name }}</p>
+      <p><strong>Email:</strong> {{ residentResponseDTO.email }}</p>
+      <p><strong>CPF:</strong> {{ residentResponseDTO.cpf }}</p>
+      <p><strong>Blocos:</strong> {{ residentResponseDTO.buildingsIds?.join(', ') }}</p>
+      <p><strong>Apartamentos:</strong> {{ residentResponseDTO.apartmentsIds?.join(', ') }}</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button (click)="saveChanges()" class="save-btn">Salvar Alterações</button>
+    <button (click)="cancelChanges()" class="cancel-btn">Cancelar</button>
+  </div>
+</div>
