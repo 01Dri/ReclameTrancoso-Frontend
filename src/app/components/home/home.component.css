@@ -1,0 +1,92 @@
+app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.header-container {
+    position: relative;
+    left: 13%;
+    
+}
+
+.header-cards {
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    background-color: rgb(231, 231, 231);
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transição suave */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Levanta a carta ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais intensa ao passar o mouse */
+}
+
+
+
+.complaints-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    width: 80%;
+  }
+
+  .complaints-container label {
+    position: relative;
+    left: 40%;
+    font-size: 20px;
+  }
+  
+  .complaint-header {
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .complaint {
+    display: contents;
+  }
+  
+  .complaint div {
+    text-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  
+  mat-paginator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombras opcionais */
+}
+
+  
+  .tratada {
+    color: green; /* Cor para 'Tratada' */
+}
+
+.nao-tratada {
+    color: orange; /* Cor para 'Não Tratada' */
+}
+
+mat-icon {
+    position: relative;
+    left: 40%;
+}

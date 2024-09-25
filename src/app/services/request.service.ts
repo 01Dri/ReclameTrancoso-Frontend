@@ -6,6 +6,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
 import { TokenResponseDTO } from '../models/TokenResponseDTO';
 import { RefreshTokenRequestDTO } from '../models/RefreshTokenRequestDTO';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class RequestService {
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService,
+    private router: Router,
     private cookie: CookieService) { }
 
   private getHeaders(): HttpHeaders {
@@ -64,26 +66,22 @@ export class RequestService {
     );
   }
 
-  refreshToken(): Observable<TokenResponseDTO> {
-    const refreshToken = this.localStorageService.get("refreshToken");
-    return this.http.post<TokenResponseDTO>("https://localhost:44345/api/v1/auth/refresh-token", new RefreshTokenRequestDTO(refreshToken)).pipe(
-      switchMap((data: TokenResponseDTO) => {
-        this.localStorageService.set('accessToken', data.accessToken);
-        this.headers = this.headers.set('Authorization', `Bearer ${data.accessToken}`);
-        return this.http.get<TokenResponseDTO>("https://localhost:44345/api/");
-      }),
-      catchError(this.handleError.bind(this))
-    );
-  }
+  //refreshToken(): Observable<TokenResponseDTO> {
+    //const refreshToken = this.localStorageService.get("refreshToken");
+    //return this.http.post<TokenResponseDTO>("https://localhost:44345/api/v1/auth/refresh-token", new RefreshTokenRequestDTO(refreshToken)).pipe(
+      //switchMap((data: TokenResponseDTO) => {
+        //this.localStorageService.set('accessToken', data.accessToken);
+        //this.headers = this.headers.set('Authorization', `Bearer ${data.accessToken}`);
+        //return this.http.get<TokenResponseDTO>("https://localhost:44345/api/");
+      //}),
+      //catchError(this.handleError.bind(this))
+    //);
+  //}
 
   private handleError(error: HttpErrorResponse) {
-    if (error.status === 401 || error.status === 403) {
-      return this.refreshToken().pipe(
-        switchMap(() => {
-          return throwError(() => error);
-        }),
-        catchError(err => throwError(() => err))
-      );
+    if (error.status === 401 || error.status === 403 || error.status === 0) {
+      this.localStorageService.clear();
+      this.router.navigateByUrl("/login");
     }
     return throwError(() => error);
   }

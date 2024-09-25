@@ -1,14 +1,23 @@
-
 mat-sidenav-container {
-    width: 20%;
-    height: 100%;
-}
-
-mat-toolbar {
-    width: 20%;
-}
-
-mat-icon {
-    position: relative;
-    top: 5px;
-}
+    width: 60px;
+    height: 100vh;
+    transition: width 0.5s ease;
+  }
+  
+  
+  mat-sidenav-container:hover {
+    width: 250px; 
+  }
+  
+  mat-sidenav-container:hover .entry .label {
+    display: inline;
+  }
+  
+  mat-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  mat-sidenav-container:hover mat-icon {
+    transform: scale(1.1);
+  }
+  

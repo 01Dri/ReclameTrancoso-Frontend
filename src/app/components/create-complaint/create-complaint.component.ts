@@ -28,10 +28,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'app-complaint-page',
   standalone: true,
   imports: [HeaderComponent, SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, FormsModule, MatInputModule, MatFormFieldModule, MatCardModule, CommonModule, MatProgressSpinnerModule],
-  templateUrl: './complaint-page.component.html',
-  styleUrl: './complaint-page.component.css'
+  templateUrl: './create-complaint.component.html',
+  styleUrl: './create-complaint.component.css'
 })
-export class ComplaintPageComponent implements OnInit {
+export class CreateComplaintComponent implements OnInit {
 
   public residentResponseDTO: ResidentRegisterResponseDTO = new ResidentRegisterResponseDTO();
   public createComplaintDTO: ComplaintCreateRequestDTO = new ComplaintCreateRequestDTO();

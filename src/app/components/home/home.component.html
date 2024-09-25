@@ -1,2 +1,57 @@
 <app-sidebar></app-sidebar>
-    
+<div class="header-container">
+  <h1>Tickets</h1>
+
+  <div class="header-cards">
+    <div class="card">
+      <label>Tickets tratados</label>
+      <span id="value-cards" style="color: green;">{{ complaintHandled.length }}</span>
+    </div>
+
+    <div class="card">
+      <label>Tickets não tratados</label>
+      <span id="value-cards" style="color: orange;">{{ complaintNotHandled.length }}</span>
+    </div>
+
+    <div class="card">
+      <label>Total tickets</label>
+      <span id="value-cards" *ngIf="pagedResponseDto.data.length !== 0">{{ pagedResponseDto.totalRecords }}</span>
+    </div>
+  </div>
+
+  <div class="complaints-container">
+    <label>ID</label>
+    <label>TÍTULO</label>
+    <label>DESCRIÇÃO</label>
+    <label>TIPO</label>
+    <label>ANONIMATO</label>
+    <label>STATUS</label>
+    <label>AÇÃO</label>
+
+    <div *ngIf="pagedResponseDto.data.length === 0" class="no-tickets-message">
+      <p>Não possui tickets.</p>
+    </div>
+
+    <div class="complaint" *ngFor="let complaint of pagedResponseDto.data">
+      <div>{{ complaint.id }}</div>
+      <div>{{ complaint.title }}</div>
+      <div>{{ complaint.description }}</div>
+      <div>{{ complaint.complaintType }}</div>
+      <div>{{ complaint.isAnonymous ? 'Sim' : 'Não' }}</div>
+      <div [ngClass]="complaint.status === 2 ? 'tratada' : 'nao-tratada'">
+        {{ complaint.status === 2 ? 'Tratada' : 'Não Tratada' }}
+      </div>
+      <div style="display: flex; align-items: center; flex-direction: row;">
+        <mat-icon (click)="removeComplaint(complaint.id)" style="cursor: pointer; color: red;">delete</mat-icon>
+        <mat-icon (click)="expandComplaint(complaint)" style="cursor: pointer; color: blue; margin-left: 10px;">open_in_new</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paginação -->
+  <mat-paginator [length]="pagedResponseDto.totalPages * pageSize"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

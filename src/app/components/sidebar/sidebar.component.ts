@@ -5,6 +5,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,12 +17,19 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    CommonModule
   ],
 
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+
+  isExpanded: boolean = false;
+  toggleSidebar(expanded: boolean) {
+    this.isExpanded = expanded;
+    console.log(this.isExpanded)
+  }
 
 }
