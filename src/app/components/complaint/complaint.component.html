@@ -9,7 +9,7 @@
     <p><strong>Bloco:</strong> {{ complaint.additionalInformation1 }}</p>
     <p><strong>Apartamento:</strong> {{ complaint.additionalInformation2 }}</p>
     <p><strong>Anônimo:</strong> {{ complaint.isAnonymous ? 'Sim' : 'Não' }}</p>
-    <p *ngIf="complaint.unionComment.text !== null"><strong>Comentário do Sindico:</strong> {{ complaint.unionComment.text}}</p>
+    <p *ngIf="complaint.managerComment.text !== null"><strong>Comentário do Sindico:</strong> {{ complaint.managerComment.text}}</p>
 
   </div>
 
