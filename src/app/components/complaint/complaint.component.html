@@ -9,14 +9,21 @@
     <p><strong>Bloco:</strong> {{ complaint.additionalInformation1 }}</p>
     <p><strong>Apartamento:</strong> {{ complaint.additionalInformation2 }}</p>
     <p><strong>Anônimo:</strong> {{ complaint.isAnonymous ? 'Sim' : 'Não' }}</p>
+    <p><strong>Descrição:</strong> {{ complaint.description}}</p>
     <p *ngIf="complaint.managerComment.text !== null"><strong>Comentário do Sindico:</strong> {{ complaint.managerComment.text}}</p>
 
   </div>
 
-  <div class="complaint-edit">
+  <div class="complaint-edit" *ngIf="!isManager"> 
     <label for="description"><strong>Descrição:</strong></label>
     <textarea id="description" [(ngModel)]="complaint.description" placeholder="Editar descrição da reclamação"></textarea>
   </div>
+
+  <div class="complaint-edit-manager" *ngIf="isManager">
+    <label for="manager-comment"><strong>Adicionar comentário:</strong></label>
+    <textarea id="managerComment" [(ngModel)]="complaint.managerComment.text" placeholder="Adicionar um comentário"></textarea>
+  </div>
+
 
   <div class="resident-details">
     <h2>Detalhes do Morador</h2>
@@ -25,8 +32,8 @@
       <p><strong>Nome:</strong> {{ residentResponseDTO.name }}</p>
       <p><strong>Email:</strong> {{ residentResponseDTO.email }}</p>
       <p><strong>CPF:</strong> {{ residentResponseDTO.cpf }}</p>
-      <p><strong>Blocos:</strong> {{ residentResponseDTO.buildingsIds?.join(', ') }}</p>
-      <p><strong>Apartamentos:</strong> {{ residentResponseDTO.apartmentsIds?.join(', ') }}</p>
+      <p><strong>Numeros Blocos:</strong> {{ residentResponseDTO.buildingsIds?.join(', ') }}</p>
+      <p><strong>Numeros Apartamentos:</strong> {{ residentResponseDTO.apartmentsIds?.join(', ') }}</p>
     </div>
   </div>
 

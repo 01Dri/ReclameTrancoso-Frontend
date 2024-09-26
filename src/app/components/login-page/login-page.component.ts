@@ -39,6 +39,8 @@ export class LoginPageComponent  implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.localStorageService.clear();
+    this.cookieService.deleteAll();
     if (this.tokenService.isLogged()) {
       console.log("TA LOGADO")
       this.router.navigateByUrl("/home")
@@ -62,7 +64,7 @@ export class LoginPageComponent  implements OnInit{
     this.request.post<TokenResponseDTO>(`v1/auth`, this.loginRequestDto)
     .subscribe({
       next: (response: TokenResponseDTO) => {
-        this.tokenResponseDTO  =response;
+        this.tokenResponseDTO  = response;
         this.toastr.success('Login efetuado com sucesso!', 'Sucesso');
         this.validationErrors = {};
         this.localStorageService.set("accessToken", this.tokenResponseDTO.accessToken);
@@ -71,10 +73,19 @@ export class LoginPageComponent  implements OnInit{
         this.localStorageService.set("accessTokenExpiresAt", String(this.tokenResponseDTO.accessTokenExpiresAt));
         this.localStorageService.set("refreshTokenExpiresAt", String(this.tokenResponseDTO.accessTokenExpiresAt));
 
-        this.cookieService.set("residentId", this.tokenResponseDTO.residentId.toString());
 
-        this.router.navigateByUrl("/home")
+        if (this.tokenResponseDTO.entityId.isManager === false) {
+          this.cookieService.set("residentId", this.tokenResponseDTO.entityId.entityId.toString());
+        } else {
+          this.cookieService.set("managerId", this.tokenResponseDTO.entityId.entityId.toString());
+        }
+        this.cookieService.set("isManager", String(this.tokenResponseDTO.entityId.isManager));
 
+        if (this.tokenResponseDTO.entityId.isManager) {
+          this.router.navigateByUrl("/manager-home")
+        } else {
+          this.router.navigateByUrl("/home")
+        }
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error('Ocorreu um erro!', 'Erro');

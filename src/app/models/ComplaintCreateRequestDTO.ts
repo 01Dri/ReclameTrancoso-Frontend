@@ -1,3 +1,4 @@
+import { ComplaintStatus } from "../enums/ComplaintStatus";
 import { ComplaintType } from "../enums/ComplaintType";
 
 export class ComplaintCreateRequestDTO {
@@ -10,4 +11,5 @@ export class ComplaintCreateRequestDTO {
     additionalInformation2!: string;
     additionalInformation3!: string;
     IsAnonymous!: boolean;
+    status!: ComplaintStatus
 }

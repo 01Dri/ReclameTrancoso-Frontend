@@ -102,7 +102,7 @@ public createComplaint() {
           this.validationErrors[err.Field] = err.Error;
         });
         console.log(this.validationErrors)
-      this.isLoading = false;
+        this.isLoading = false;
 
       } else {
         console.log("Detalhes do Erro:", error.error);

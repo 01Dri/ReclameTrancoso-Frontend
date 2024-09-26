@@ -13,6 +13,7 @@ export class ComplaintDTO {
     additionalInformation3!: string;
     isAnonymous!: boolean;
     status!: ComplaintStatus;
+    residentId!: number;
     managerComment!: CommentDTO;
 
 }
