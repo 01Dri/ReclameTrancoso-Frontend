@@ -25,13 +25,17 @@ export class ComplaintComponent {
   public residentId!: number;
   public residentResponseDTO: ResidentResponseDTO = new ResidentResponseDTO();
   public isManager!: boolean;
+  public isManagerCookieValue!: string;
+
   public managerId!: number;
 
 
   constructor(private router: Router, private cookieService: CookieService, private requestService: RequestService, private toastr: ToastrService) {
 
     this.residentId = Number(this.cookieService.get("residentId"));
-    this.isManager = Boolean(this.cookieService.get("isManager"));
+    this.isManagerCookieValue = this.cookieService.get("isManager");
+    this.isManager = this.isManagerCookieValue === "true";
+
     console.log(this.residentId);
     console.log("IS MANAGER? " + this.isManager)
     if (this.isManager) {
