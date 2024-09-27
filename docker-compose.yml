@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .  # Caminho onde seu Dockerfile está localizado
+      dockerfile: Dockerfile
+    image: dridev/reclama-trancoso:1.0
+    ports:
+      - "80:80"  # Mapeando a porta 80 do container para a porta 80 do host

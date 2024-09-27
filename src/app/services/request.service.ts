@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class RequestService {
 
-  private apiUrl = 'https://localhost:44345/api/';
+  private apiUrl = 'http://104.42.17.211:5000/api/';
   private headers = new HttpHeaders();
 
   constructor(
