@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -31,7 +31,7 @@ export class SidebarComponent {
 
   isExpanded: boolean = false;
 
-  constructor(private cookieService: CookieService, private localStorageService: LocalStorageService) {}
+  constructor(private cookieService: CookieService, private localStorageService: LocalStorageService, private router: Router) {}
   toggleSidebar(expanded: boolean) {
     this.isExpanded = expanded;
     console.log(this.isExpanded)
@@ -41,6 +41,7 @@ export class SidebarComponent {
   public logout() {
     this.cookieService.deleteAll();
     this.localStorageService.clear();
+    this.router.navigateByUrl("/login");
   }
 
 }
