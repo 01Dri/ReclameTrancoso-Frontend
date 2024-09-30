@@ -14,6 +14,13 @@
           <span class="label-complaint" *ngIf="isExpanded" [routerLink]="['/complaint']">Abrir Ticket</span> 
         </span>
       </a>
+
+      <a mat-list-item>
+        <span class="entry">
+          <mat-icon>exit_to_app</mat-icon>
+          <span class="label-complaint" *ngIf="isExpanded" (click)="logout()">Sair</span> 
+        </span>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
