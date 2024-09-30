@@ -1,27 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { SidebarComponent } from "../sidebar/sidebar.component";
-import { RequestService } from '../../services/request.service';
+import { Component } from '@angular/core';
 import { PagedResponseDto } from '../../models/PagedResponseDto';
 import { ComplaintDTO } from '../../models/ComplaintDTO';
+import { ComplaintStatus } from '../../enums/ComplaintStatus';
+import { RequestService } from '../../services/request.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { ComplaintStatus } from '../../enums/ComplaintStatus';
+import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-manager-home-page',
   standalone: true,
-  imports: [SidebarComponent, MatCardModule, MatPaginatorModule, CommonModule, MatIconModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  imports: [CommonModule, FormsModule, MatPaginatorModule, MatIconModule, SidebarComponent],
+  templateUrl: './manager-home-page.component.html',
+  styleUrl: './manager-home-page.component.css'
 })
-export class HomeComponent implements OnInit {
-
-  private residentId!: number;
+export class ManagerHomePageComponent {
   public pagedResponseDto: PagedResponseDto<ComplaintDTO> = new PagedResponseDto<ComplaintDTO>();
   public complaintHandled:ComplaintDTO[] = [];
   public complaintNotHandled:ComplaintDTO[] = [];
@@ -40,15 +38,15 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.residentId = Number(this.cookieService.get("residentId"));
     this.loadComplaints(this.pageNumber, this.pageSize);
   }
 
   public loadComplaints(page: number, size: number): void {
-    this.requestService.get<PagedResponseDto<ComplaintDTO>>(`v1/complaints/${this.residentId}?page=${page}&size=${size}`)
+    this.requestService.get<PagedResponseDto<ComplaintDTO>>(`v1/complaints?page=${page}&size=${size}`)
     .subscribe({
       next: (data) => {
         this.pagedResponseDto = data;
+        console.log(JSON.stringify(this.pagedResponseDto.data.length));
         this.complaintHandled = this.pagedResponseDto.data.filter(v => Number(v.status) === Number(this.complaintStatus.TREATED));
         this.complaintNotHandled = this.pagedResponseDto.data.filter(v => Number(v.status) === Number(this.complaintStatus.NO_TREATMENT));
 
