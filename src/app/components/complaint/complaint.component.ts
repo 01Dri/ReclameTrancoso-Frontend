@@ -115,7 +115,11 @@ export class ComplaintComponent {
 
   public cancelChanges() {
     console.log('Alterações canceladas.');
-    this.router.navigateByUrl('/');
+    if (this.isManager) {
+      this.router.navigateByUrl('/manager-home');
+    } else {
+      this.router.navigateByUrl('/home');
+    }
   }
 
   public getResidentInformations() {
