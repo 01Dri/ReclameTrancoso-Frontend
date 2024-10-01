@@ -4,7 +4,7 @@ import { SidebarComponent } from "../sidebar/sidebar.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ComplaintCreateRequestDTO } from '../../models/ComplaintCreateRequestDTO';
 import { Router } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { ComplaintType } from '../../enums/ComplaintType';
 import { CommonModule } from '@angular/common';
 import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';

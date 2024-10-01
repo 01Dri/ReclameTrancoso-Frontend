@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';

@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { FormsModule } from '@angular/forms';
 import { LoginRequestDTO } from '../../models/LoginRequestDTO';
 import { TokenResponseDTO } from '../../models/TokenResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { CpfMaskDirective } from '../../diretives/cpf-mask.directive';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { TokenService } from '../../services/token.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { TokenService } from '../../services/token/token.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ResidentResponseDTO } from '../../models/ResidentResponseDTO';
 

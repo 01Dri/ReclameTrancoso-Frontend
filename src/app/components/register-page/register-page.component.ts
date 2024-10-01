@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { ResidentRegisterRequestDTO } from '../../models/ResidentRegisterRequestDTO';
 import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
 import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';

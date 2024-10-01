@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PagedResponseDto } from '../../models/PagedResponseDto';
 import { ComplaintDTO } from '../../models/ComplaintDTO';
 import { ComplaintStatus } from '../../enums/ComplaintStatus';
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';

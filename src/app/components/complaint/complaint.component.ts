@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { ResidentResponseDTO } from '../../models/ResidentResponseDTO';
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ComplaintUpdateRequestDTO } from '../../models/ComplaintUpdateRequestDTO';
 import { ToastrService } from 'ngx-toastr';

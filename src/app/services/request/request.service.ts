@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { LocalStorageService } from './local-storage.service';
-import { TokenResponseDTO } from '../models/TokenResponseDTO';
-import { RefreshTokenRequestDTO } from '../models/RefreshTokenRequestDTO';
+import { LocalStorageService } from '../local-storage/local-storage.service';
+import { TokenResponseDTO } from '../../models/TokenResponseDTO';
+import { RefreshTokenRequestDTO } from '../../models/RefreshTokenRequestDTO';
 import { Router } from '@angular/router';
+import {environment} from '../../../enviroment/environment '
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class RequestService {
   private developmentEnviroment = "https://localhost:44345"
   private productionEnvirument = "http://13.93.166.24:5000"
 
-  private apiUrl = `${this.developmentEnviroment}/api/`;
+  private apiUrl = "";
   private headers = new HttpHeaders();
 
   constructor(
@@ -26,6 +27,11 @@ export class RequestService {
     private cookie: CookieService) { }
 
   private getHeaders(): HttpHeaders {
+    if (environment.production) {
+      this.apiUrl = `${this.productionEnvirument}/api/`
+    } else {
+      this.apiUrl = `${this.developmentEnviroment}/api/`
+    }
     const token = this.localStorageService.get('accessToken');
     this.headers = new HttpHeaders();
     if (token) {

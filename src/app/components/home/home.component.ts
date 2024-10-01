@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from "../sidebar/sidebar.component";
-import { RequestService } from '../../services/request.service';
+import { RequestService } from '../../services/request/request.service';
 import { PagedResponseDto } from '../../models/PagedResponseDto';
 import { ComplaintDTO } from '../../models/ComplaintDTO';
 import { CookieService } from 'ngx-cookie-service';

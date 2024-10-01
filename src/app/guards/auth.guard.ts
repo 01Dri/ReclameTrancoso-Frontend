@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { LocalStorageService } from '../services/local-storage.service';
-import { RequestService } from '../services/request.service';
+import { LocalStorageService } from '../services/local-storage/local-storage.service';
+import { RequestService } from '../services/request/request.service';
 import { TokenResponseDTO } from '../models/TokenResponseDTO';
 import { RefreshTokenRequestDTO } from '../models/RefreshTokenRequestDTO';
 import { HttpErrorResponse } from '@angular/common/http';
