@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 })
 export class RequestService {
 
-  private apiUrl = 'http://13.93.166.24:5000/api/';
+  private developmentEnviroment = "https://localhost:44345"
+  private productionEnvirument = "http://13.93.166.24:5000"
+
+  private apiUrl = `${this.developmentEnviroment}/api/`;
   private headers = new HttpHeaders();
 
   constructor(
