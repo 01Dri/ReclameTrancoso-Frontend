@@ -14,8 +14,6 @@ import {environment} from '../../../enviroment/environment '
 })
 export class RequestService {
 
-  private developmentEnviroment = "https://localhost:44345"
-  private productionEnvirument = "http://13.93.166.24:5000"
 
   private apiUrl = "";
   private headers = new HttpHeaders();
@@ -28,9 +26,9 @@ export class RequestService {
 
   private getHeaders(): HttpHeaders {
     if (environment.production) {
-      this.apiUrl = `${this.productionEnvirument}/api/`
+      this.apiUrl = `${environment.urls.Production}/api/`
     } else {
-      this.apiUrl = `${this.developmentEnviroment}/api/`
+      this.apiUrl = `${environment.urls.Development}/api/`
     }
     const token = this.localStorageService.get('accessToken');
     this.headers = new HttpHeaders();
