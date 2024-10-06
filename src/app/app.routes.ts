@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './components/login-page/login-page.component';
-import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { LoginPageComponent } from './components/global-components/login-page/login-page.component';
+import { RegisterPageComponent } from './components/resident-components/register-page/register-page.component';
 import { authGuard } from './guards/auth.guard';
-import { HomeComponent } from './components/home/home.component';
-import { ComplaintComponent } from './components/complaint/complaint.component';
-import { CreateComplaintComponent } from './components/create-complaint/create-complaint.component';
-import { ManagerHomePageComponent } from './manager-components/manager-home-page/manager-home-page.component';
+import { HomeComponent } from './components/resident-components/home/home.component';
+import { ComplaintComponent } from './components/global-components/complaint/complaint.component';
+import { CreateComplaintComponent } from './components/resident-components/create-complaint/create-complaint.component';
+import { ManagerHomePageComponent } from './components/manager-components/manager-home-page/manager-home-page.component';
 import { managerGuard } from './guards/manager.guard';
 
 export const routes: Routes = [

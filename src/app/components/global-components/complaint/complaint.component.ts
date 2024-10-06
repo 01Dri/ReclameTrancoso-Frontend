@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { ComplaintDTO } from '../../models/ComplaintDTO';
+import { ComplaintDTO } from '../../../models/ComplaintDTO';
 import { Router } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { ResidentResponseDTO } from '../../models/ResidentResponseDTO';
-import { RequestService } from '../../services/request/request.service';
+import { ResidentResponseDTO } from '../../../models/ResidentResponseDTO';
+import { RequestService } from '../../../services/request/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ComplaintUpdateRequestDTO } from '../../models/ComplaintUpdateRequestDTO';
+import { ComplaintUpdateRequestDTO } from '../../../models/ComplaintUpdateRequestDTO';
 import { ToastrService } from 'ngx-toastr';
-import { ManagerAddCommentRequestDTO } from '../../models/ManagerAddCommentRequestDTO';
-import { CommentDTO } from '../../models/CommentDTO';
+import { ManagerAddCommentRequestDTO } from '../../../models/ManagerAddCommentRequestDTO';
+import { CommentDTO } from '../../../models/CommentDTO';
 
 @Component({
   selector: 'app-complaint',

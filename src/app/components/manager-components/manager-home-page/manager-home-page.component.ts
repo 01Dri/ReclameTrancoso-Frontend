@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { PagedResponseDto } from '../../models/PagedResponseDto';
-import { ComplaintDTO } from '../../models/ComplaintDTO';
-import { ComplaintStatus } from '../../enums/ComplaintStatus';
-import { RequestService } from '../../services/request/request.service';
+import { PagedResponseDto } from '../../../models/PagedResponseDto';
+import { ComplaintDTO } from '../../../models/ComplaintDTO';
+import { ComplaintStatus } from '../../../enums/ComplaintStatus';
+import { RequestService } from '../../../services/request/request.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { SidebarComponent } from '../../global-components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-manager-home-page',

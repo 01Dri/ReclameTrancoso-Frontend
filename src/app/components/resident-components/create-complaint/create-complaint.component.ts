@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from "../header/header.component";
-import { SidebarComponent } from "../sidebar/sidebar.component";
+import { SidebarComponent } from "../../global-components/sidebar/sidebar.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { RequestService } from '../../services/request/request.service';
+import { RequestService } from '../../../services/request/request.service';
 import { CookieService } from 'ngx-cookie-service';
-import { ResidentRegisterResponseDTO } from '../../models/ResidentRegisterResponseDTO';
+import { ResidentRegisterResponseDTO } from '../../../models/ResidentRegisterResponseDTO';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { ComplaintCreateRequestDTO } from '../../models/ComplaintCreateRequestDTO';
+import { ComplaintCreateRequestDTO } from '../../../models/ComplaintCreateRequestDTO';
 import { Router } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
-import { ComplaintType } from '../../enums/ComplaintType';
+import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
+import { ComplaintType } from '../../../enums/ComplaintType';
 import { CommonModule } from '@angular/common';
-import { BuildingResponseDTO } from '../../models/BuildingResponseDTO';
+import { BuildingResponseDTO } from '../../../models/BuildingResponseDTO';
 import { ToastrService } from 'ngx-toastr';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -27,7 +26,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-complaint-page',
   standalone: true,
-  imports: [HeaderComponent, SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, FormsModule, MatInputModule, MatFormFieldModule, MatCardModule, CommonModule, MatProgressSpinnerModule],
+  imports: [SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, FormsModule, MatInputModule, MatFormFieldModule, MatCardModule, CommonModule, MatProgressSpinnerModule],
   templateUrl: './create-complaint.component.html',
   styleUrl: './create-complaint.component.css'
 })

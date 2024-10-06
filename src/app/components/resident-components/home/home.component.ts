@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarComponent } from "../sidebar/sidebar.component";
-import { RequestService } from '../../services/request/request.service';
-import { PagedResponseDto } from '../../models/PagedResponseDto';
-import { ComplaintDTO } from '../../models/ComplaintDTO';
+import { SidebarComponent } from "../../global-components/sidebar/sidebar.component";
+import { RequestService } from '../../../services/request/request.service';
+import { PagedResponseDto } from '../../../models/PagedResponseDto';
+import { ComplaintDTO } from '../../../models/ComplaintDTO';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { ComplaintStatus } from '../../enums/ComplaintStatus';
+import { ComplaintStatus } from '../../../enums/ComplaintStatus';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
