@@ -1,79 +1,93 @@
 .register-page-container {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinhar no topo */
+    min-height: 100vh; /* Altura mínima igual à da viewport */
+    width: 100vw; /* Largura igual à da viewport */
+    background-color: rgba(255, 255, 255, 0.5);
+    overflow-y: auto; /* Permite rolagem vertical */
+}
+
+/* Image container */
+.image-container {
+    flex: 1; /* Ocupará 1 parte do espaço total */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5); /* Sobreposição preta com 50% de transparência */
-    overflow: hidden; /* Garante que o pseudo-elemento não ultrapasse os limites do contêiner */
+    background-color: #ffffff;
+    height: 100vh; /* Preencher a altura da viewport */
+    width: 100%; /* Preencher a largura disponível */
 }
 
-.register-page-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/assets/background-login.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px); /* Aplica o desfoque */
-    z-index: 1; /* Coloca o pseudo-elemento atrás do conteúdo */
+.image-container img {
+    height: 110vh; /* Imagem ocupa toda a altura do contêiner */
+    width: 100%; /* Imagem ocupa toda a largura do contêiner */
+    object-fit: cover; /* Ajusta a imagem para cobrir o contêiner sem distorção */
 }
 
 .inputs-container {
-    position: relative;
-    z-index: 2; /* Garante que o conteúdo fique acima da imagem desfocada */
+    flex: 1; /* Ocupará 2 partes do espaço total, maior que a imagem */
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com 90% de opacidade */
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    height: 90%;
-    margin-bottom: 30px;
+    /* Adiciona uma sombra maior para profundidade */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 
+                0 12px 40px rgba(0, 0, 0, 0.3); 
+    height: 100vh; /* Preencher a altura total da viewport */
+    overflow-y: auto; /* Permite rolagem caso o conteúdo ultrapasse o tamanho do contêiner */
+    margin-left: 20px; /* Espaçamento entre a imagem e o contêiner de inputs */
+    position: relative;
+    bottom: 2px;
+}
+
+/* Adiciona um efeito de borda dupla para aumentar a profundidade */
+.inputs-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
+    border-radius: 12px;
+    z-index: -1;
 }
 
 .header {
     position: relative;
-    bottom: 30px;
+    bottom: 20px;
 }
 
 .fields {
-    position: relative;
     display: flex;
     flex-direction: column;
     margin-top: 15px;
     font-family: sans-serif;
-    bottom: 70px;
 }
 
 .fields input, select {
     height: 40px;
     border-radius: 10px;
-    padding-left: 10px; /* Adiciona um espaçamento à esquerda do texto dentro do input */
-    border-width: 1px; /* Borda de 1px de espessura */
-
+    padding-left: 10px;
+    border-width: 1px;
+    /* Sombra leve para inputs */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .fields button {
     height: 45px;
-
     background-color: #abebc6;
     border-radius: 10px;
     border: none;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transição suave */
-
-
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para os botões */
 }
 
 .fields button:hover {
     background-color: #58d68d;
-    transform: scale(1.05); /* Aumenta ligeiramente o tamanho do botão */
+    transform: scale(1.05);
 }
 
 #submit-btn :disabled {
@@ -82,70 +96,16 @@
 
 .error-message {
     color: red;
-    font-size: 0.875em; /* Ajuste o tamanho da fonte conforme necessário */
-    margin-top: 0.25em; /* Espaço acima da mensagem de erro */
-  }
-
-@media (max-width: 1600px) and (min-width: 900px) {
-    .header {
-        position: relative;
-        bottom: 30px;
-    }
-    .fields {
-        position: relative;
-        bottom: 70px;
-        margin-top: 10px;
-    }
-    .fields input, select {
-        height: 34px;
-        border-radius: 10px;
-    }
-    .fields button {
-        position: relative;
-        bottom: 10px;
-    }
-
-    #login-label {
-        position: relative;
-        bottom: 20px;
-    }
-}
-
-@media (max-width: 1368px) and (min-width: 768px) {
-    .header {
-        position: relative;
-        bottom: 30px;
-    }
-
-    .fields {
-        margin-top: 8px;
-    }
-
-    .fields input, select {
-        height: 23px;
-
-    }
-
-    .fields button {
-        position: relative;
-        height: 30px;
-    }
+    font-size: 0.875em;
+    margin-top: 0.25em;
 }
 
 @media (max-width: 768px) {
     .inputs-container {
-        width: 300px;
+        width: 100%;
+        margin-left: 0;
     }
-    .fields {
-        margin-top: 4px;
-
+    .image-container {
+        display: none; /* Esconde a imagem em telas menores */
     }
-
-    .fields input, select {
-        height: 35px;
-
-    }
-
-
-
 }

@@ -1,59 +1,56 @@
 <div class="login-page-container">
-    <div class="inputs-container">
+  <div class="image-container"></div>
 
-        <div class="header">
-            <h1>Login</h1>
-        </div>
+  <div class="inputs-container">
+      <div class="header">
+          <h1>Login</h1>
+      </div>
 
-        <div class="fields">
-            <label>Forma de login</label>
-            <div class="radio-login-type">
+      <div class="fields">
+          <label>Forma de login</label>
+          <div class="radio-login-type">
               <label>
-                <input type="radio" name="loginType" value="Email" [(ngModel)]="logintype"> Email
+                  <input type="radio" name="loginType" value="Email" [(ngModel)]="logintype"> Email
               </label>
               <label>
-                <input type="radio" name="loginType" value="CPF" [(ngModel)]="logintype"> CPF
+                  <input type="radio" name="loginType" value="CPF" [(ngModel)]="logintype"> CPF
               </label>
-            </div>
-            <div *ngIf="validationErrors['Cpf-Email']" class="error-message">
-                {{ validationErrors['Cpf-Email'] }}
-              </div>
           </div>
+          <div *ngIf="validationErrors['Cpf-Email']" class="error-message">
+              {{ validationErrors['Cpf-Email'] }}
+          </div>
+      </div>
 
-        <div class="fields" *ngIf="logintype === 'CPF'">
-            <label>CPF</label>
-            <input type="text" placeholder="Digite seu CPF" required maxlength="14" [(ngModel)]="loginRequestDto.cpf" appCpfMask>
-            <div *ngIf="validationErrors['Cpf']" class="error-message">
-                {{ validationErrors['Cpf'] }}
-              </div>
-        </div>
+      <div class="fields" *ngIf="logintype === 'CPF'">
+          <label>CPF</label>
+          <input type="text" placeholder="Digite seu CPF" required maxlength="14" [(ngModel)]="loginRequestDto.cpf" appCpfMask>
+          <div *ngIf="validationErrors['Cpf']" class="error-message">
+              {{ validationErrors['Cpf'] }}
+          </div>
+      </div>
 
-        <div class="fields" *ngIf="logintype === 'Email'">
-            <label>Email</label>
-            <input type="email" placeholder="Digite seu e-mail" required [(ngModel)]="loginRequestDto.email">
-            <div *ngIf="validationErrors['Email']" class="error-message">
-                {{ validationErrors['Email'] }}
-              </div>
-        </div>
+      <div class="fields" *ngIf="logintype === 'Email'">
+          <label>Email</label>
+          <input type="email" placeholder="Digite seu e-mail" required [(ngModel)]="loginRequestDto.email">
+          <div *ngIf="validationErrors['Email']" class="error-message">
+              {{ validationErrors['Email'] }}
+          </div>
+      </div>
 
-        <div class="fields">
-            <label>Senha</label>
-            <input type="password" placeholder="Digite sua senha" required maxlength="50" [(ngModel)]="loginRequestDto.password">
-            <div *ngIf="validationErrors['Password']" class="error-message">
-                {{ validationErrors['Password'] }}
-              </div>
+      <div class="fields">
+          <label>Senha</label>
+          <input type="password" placeholder="Digite sua senha" required maxlength="50" [(ngModel)]="loginRequestDto.password">
+          <div *ngIf="validationErrors['Password']" class="error-message">
+              {{ validationErrors['Password'] }}
+          </div>
+      </div>
 
-        </div>
+      <div class="fields">
+          <button (click)="login()">Login</button>
+      </div>
 
-        <div class="fields">
-            <button (click)="login()" >Login</button>
-        </div>
-
-        <div class="fields">
-            <label>Caso não tenha uma conta, <a [routerLink]="['/register']">cadastre-se aqui</a></label>
-        </div>
-
-    
-    </div>
-
+      <div class="fields">
+          <label>Caso não tenha uma conta, <a [routerLink]="['/register']">cadastre-se aqui</a></label>
+      </div>
+  </div>
 </div>
