@@ -11,12 +11,13 @@ import { CpfMaskDirective } from '../../../diretives/cpf-mask.directive';
 import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
 import { TokenService } from '../../../services/token/token.service';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule, CpfMaskDirective],
+  imports: [RouterModule, FormsModule, CommonModule, CpfMaskDirective, MatSpinner],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
@@ -26,6 +27,7 @@ export class LoginPageComponent  implements OnInit{
   public loginRequestDto: LoginRequestDTO = new LoginRequestDTO();
   private tokenResponseDTO: TokenResponseDTO = new TokenResponseDTO();
   public validationErrors: { [key: string]: string } = {};
+  public isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -38,11 +40,9 @@ export class LoginPageComponent  implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.localStorageService.clear();
-    this.cookieService.deleteAll();
     if (this.tokenService.isLogged()) {
       console.log("TA LOGADO")
-      this.router.navigateByUrl("/home")
+      this.router.navigateByUrl("/home");
     } else {
       console.log("NÃO ESTÁ LOGADO");
     }
@@ -54,6 +54,7 @@ export class LoginPageComponent  implements OnInit{
   }
 
   public login() {
+    this.isLoading = true;
     if (this.logintype === "CPF") {
       this.loginRequestDto.email = "";
     } else {
@@ -78,12 +79,17 @@ export class LoginPageComponent  implements OnInit{
         } else {
           this.cookieService.set("managerId", this.tokenResponseDTO.entityId.entityId.toString());
         }
-        this.cookieService.set("isManager", String(this.tokenResponseDTO.entityId.isManager));
+        this.cookieService.set("isManager", (String(this.tokenResponseDTO.entityId.isManager)));
 
         if (this.tokenResponseDTO.entityId.isManager) {
           this.router.navigateByUrl("/manager-home")
+          console.log("MANAGER HOME")
+          return;
+
         } else {
+          console.log("HOME ")
           this.router.navigateByUrl("/home")
+          return;
         }
       },
       error: (error: HttpErrorResponse) => {
@@ -101,6 +107,10 @@ export class LoginPageComponent  implements OnInit{
         } else {
           console.log("Detalhes do Erro:", error.error);
         }
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
 

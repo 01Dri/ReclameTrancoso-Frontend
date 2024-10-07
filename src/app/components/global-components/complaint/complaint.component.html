@@ -1,4 +1,5 @@
 <app-sidebar></app-sidebar>
+<app-header></app-header>
 <div class="complaint-details">
   <h2>Detalhes da Reclamação</h2>
 
@@ -25,7 +26,7 @@
   </div>
 
 
-  <div class="resident-details">
+  <div class="resident-details" *ngIf="complaint.isAnonymous === false">
     <h2>Detalhes do Morador</h2>
     <div class="resident-info">
       <p><strong>ID do Morador:</strong> {{ residentResponseDTO.id }}</p>

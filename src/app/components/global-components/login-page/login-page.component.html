@@ -53,4 +53,8 @@
           <label>Caso não tenha uma conta, <a [routerLink]="['/register']">cadastre-se aqui</a></label>
       </div>
   </div>
+
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>

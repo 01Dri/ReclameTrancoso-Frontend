@@ -4,23 +4,20 @@
       <a mat-list-item>
         <span class="entry">
           <mat-icon>house</mat-icon>
-          <span class="label-home" *ngIf="isExpanded" [routerLink]="['/home']">Home</span> 
+          <span class="label-home" *ngIf="isExpanded" (click)="toHome()">
+            Home
+          </span>
         </span>
       </a>
 
       <a mat-list-item>
         <span class="entry">
           <mat-icon>assessment</mat-icon>
-          <span class="label-complaint" *ngIf="isExpanded" [routerLink]="['/complaint']">Abrir Ticket</span> 
+          <span class="label-complaint" *ngIf="isExpanded" (click)="toComplaintTicket()">
+          Abrir Ticket</span> 
         </span>
       </a>
 
-      <a mat-list-item>
-        <span class="entry">
-          <mat-icon>exit_to_app</mat-icon>
-          <span class="label-complaint" *ngIf="isExpanded" (click)="logout()">Sair</span> 
-        </span>
-      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -6,9 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
-import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
+import { ManagerService } from '../../../services/manager/manager.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,19 +27,32 @@ import { LocalStorageService } from '../../../services/local-storage/local-stora
 })
 export class SidebarComponent {
 
-  isExpanded: boolean = false;
+  public isExpanded: boolean = false;
 
-  constructor(private cookieService: CookieService, private localStorageService: LocalStorageService, private router: Router) {}
-  toggleSidebar(expanded: boolean) {
+
+  constructor(private router: Router, private managerService: ManagerService) {
+  }
+
+
+  public toggleSidebar(expanded: boolean) {
     this.isExpanded = expanded;
-    console.log(this.isExpanded)
   }
 
-
-  public logout() {
-    this.cookieService.deleteAll();
-    this.localStorageService.clear();
-    this.router.navigateByUrl("/login");
+  public toHome() {
+    if (this.managerService.isManager()) {
+      console.log("É MANAGER ISSO")
+      this.router.navigateByUrl("/manager-home");
+      return;
+    }
+    this.router.navigateByUrl("/home");
   }
+
+  public toComplaintTicket() {
+    if (!this.managerService.isManager()) {
+      this.router.navigateByUrl("/create-complaint-ticket");
+      return;
+    }
+  }
+
 
 }
